@@ -4,20 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine'sDay_Challenge</title>
+    <title>Valentine'sDay_2026</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="icon" href="assets/images/favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon_io/apple-touch-icon.png">
+
+
 </head>
 
 <body>
 
 
 
-    <header class="navbar">
+    <!--header class="navbar">
         <div class="navbar__logo">MonPetit<span>❤</span>Cœur</div>
 
         <nav class="navbar__links">
@@ -27,7 +36,27 @@
         </nav>
 
         <a href="#prix" class="navbar__cta">Offrir maintenant</a>
+    </header-->
+
+    <header class="navbar">
+        <div class="navbar__logo">MonPetit<span>❤</span>Cœur</div>
+
+        <!-- Hamburger (mobile seulement via CSS) -->
+        <button class="navbar__toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+            <i class="fa-solid fa-bars" id="navIcon"></i>
+        </button>
+
+        <nav class="navbar__links" id="navMenu">
+            <a href="#apropos">La peluche</a>
+            <a href="#pourquoi">Pourquoi l’offrir</a>
+            <a href="#avis">Avis</a>
+            <a href="#prix" class="navbar__cta navbar__cta--mobile">Offrir maintenant</a>
+        </nav>
+
+        <!-- CTA desktop (on le cache en mobile) -->
+        <a href="#prix" class="navbar__cta navbar__cta--desktop">Offrir maintenant</a>
     </header>
+
 
 
     <!-- Hero Section-->
@@ -373,6 +402,37 @@
         // Ouverture du paiement au clic
         document.getElementById("pay-btn").addEventListener("click", function () {
             fedapay.open();
+        });
+    </script>
+
+
+    <script>
+        const navToggle = document.getElementById("navToggle");
+        const navMenu = document.getElementById("navMenu");
+        const navIcon = document.getElementById("navIcon");
+
+        navToggle.addEventListener("click", () => {
+            const isOpen = navMenu.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            navIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+        });
+
+        // Fermer au clic sur un lien
+        navMenu.querySelectorAll("a").forEach(a => {
+            a.addEventListener("click", () => {
+                navMenu.classList.remove("is-open");
+                navToggle.setAttribute("aria-expanded", "false");
+                navIcon.className = "fa-solid fa-bars";
+            });
+        });
+
+        // Fermer si clic en dehors
+        document.addEventListener("click", (e) => {
+            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                navMenu.classList.remove("is-open");
+                navToggle.setAttribute("aria-expanded", "false");
+                navIcon.className = "fa-solid fa-bars";
+            }
         });
     </script>
 

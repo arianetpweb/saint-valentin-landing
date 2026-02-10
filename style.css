@@ -99,8 +99,94 @@ img {
   box-shadow: 0 10px 20px rgba(0, 0, 0, .18);
 }
 
+.navbar__cta--mobile{
+  display: none;
+}
+
 .navbar__cta:hover {
   transform: translateY(-1px);
+}
+
+
+/* =========================
+   MOBILE NAVBAR ONLY
+   ========================= */
+@media (max-width: 860px) {
+
+  .navbar{
+    padding: 14px 16px;
+  }
+
+  /* Cache les liens en ligne */
+  .navbar__links{
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: calc(100% + 10px);
+
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+
+    border-radius: 16px;
+    background: rgba(20, 0, 12, .55);
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(14px);
+
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+
+  /* Menu ouvert */
+  .navbar__links.is-open{
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Style des liens en mobile */
+  .navbar__links a{
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+  }
+
+  /* Hamburger visible en mobile */
+  .navbar__toggle{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  /* Cache le CTA desktop */
+  .navbar__cta--desktop{
+    display: none;
+  }
+
+  /* CTA version mobile dans le menu */
+  .navbar__cta--mobile{
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* Par défaut (desktop), on cache le hamburger */
+.navbar__toggle{
+  display: none;
 }
 
 
@@ -397,6 +483,27 @@ img {
 }
 
 
+
+
+/* Ajustement MOBILE : badge + visuel sous la navbar */
+@media (max-width: 860px) {
+
+  /* Badge Saint-Valentin */
+  .hero__badge-top{
+    top: 0;                 /* on neutralise le positionnement desktop */
+    left: 0;
+    margin-top: 105px;       /* 🔥 pousse sous la navbar */
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  /* Visuel (blob + image) */
+  .hero__visual{
+    margin-top: 30px;       /* 🔥 descend le visuel */
+  }
+
+}
 
 /*Section 2*/
 
