@@ -13,6 +13,43 @@
         rel="stylesheet">
 </head>
 
+<!-- Script officiel FedaPay Checkout -->
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+
+<script>
+    // Initialisation FedaPay
+    const fedapay = FedaPay.init({
+        public_key: "pk_sandbox_Ie-dN02YpVTbC_HrzyrEXDMS", // ← remplace ici
+
+        transaction: {
+            amount: 3500,                  // 3 500 FCFA
+            description: "Peluche Saint-Valentin 2026",
+            currency: { iso: "XOF" }
+        },
+
+        customer: {
+            email: "client@example.com",    // valeur par défaut OK
+            lastname: "Client"
+        },
+
+        onComplete: function ({ reason, transaction }) {
+            if (reason === FedaPay.CHECKOUT_COMPLETED) {
+                // Succès → page merci ou section merci
+                window.location.href = "merci.html";
+                // ou: window.location.hash = "#merci";
+            }
+        }
+    });
+
+    // Ouverture du paiement au clic
+    document.getElementById("pay-btn").addEventListener("click", function () {
+        fedapay.open();
+    });
+</script>
+
+
+
 <body>
 
 
@@ -53,28 +90,12 @@
                 </ul>
             </div>
 
-            <!--div class="hero__visual">
-                <div class="hero__blob"></div>
-
-                <div class="hero__media" aria-hidden="true">
-                    <video class="hero__video" autoplay muted loop playsinline preload="metadata">
-                        <source src="assets/videos/ouverture_peluche.mp4" type="video/mp4" />
-                        Votre navigateur ne supporte pas la vidéo.
-                    </video>
-                </div>
-
-                <div class="hero__hearts">
-                    <span class="heart heart--1"></span>
-                    <span class="heart heart--2"></span>
-                    <span class="heart heart--3"></span>
-                </div>
-            </div-->
-
             <div class="hero__visual">
                 <div class="hero__blob hero__blob--media">
-                    <video class="hero__video" autoplay muted loop playsinline preload="auto">
+                    <!--video class="hero__video" autoplay muted loop playsinline preload="auto">
                         <source src="assets/Videos/ouverture_peluche.mp4" type="video/mp4" />
-                    </video>
+                    </video-->
+                    <img src="assets/images/peluche.png" alt="" class="hero__video">
                 </div>
 
                 <div class="hero__hearts">
@@ -255,7 +276,7 @@
                         Cliquez et offrez une attention qui parle pour vous.
                     </p>
 
-                    <a class="btn btn--primary pricing__cta" href="#cta-final">
+                    <a href="javascript:void(0)" id="pay-btn" class="btn btn--primary pricing__cta">
                         Je l’offre à la personne que j’aime
                     </a>
 
